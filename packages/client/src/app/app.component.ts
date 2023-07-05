@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectExchangeRate } from './store/accounts/accounts.selectors';
+import { selectExchangeRate, selectExchangeRateFetching } from './store/accounts/accounts.selectors';
 import { fetchExchangeRate } from './store/accounts/accounts.actions';
 
 @Component({
@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
 
   get exchangeRateBtcUsd$() {
     return this.store.select(selectExchangeRate)
+  }
+
+  get exchangeRateFetching$() {
+    return this.store.select(selectExchangeRateFetching)
   }
 
   ngOnInit(): void {

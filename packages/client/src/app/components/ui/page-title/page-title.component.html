@@ -1,6 +1,15 @@
 <div class="outer-container">
   <div class="inner-container global-container">
-    <h2>Accounts</h2>
+    <div class="title">
+      <h2>Accounts</h2>
+      <!-- keeping the element here to prevent layout movement -->
+      <div class="loading-spinner">
+        <mat-spinner
+          *ngIf="isFetching"
+          style="width: 20px; height: 20px"
+        ></mat-spinner>
+      </div>
+    </div>
 
     <div class="breadcrumbs">
       <a class="item">Home</a>

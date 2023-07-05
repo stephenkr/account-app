@@ -5,6 +5,16 @@
   padding: 25px 0;
 }
 
+.title {
+  display: flex;
+  align-items: center;
+
+  .loading-spinner {
+    width: 20px;
+    margin-left: 10px;
+  }
+}
+
 .inner-container {
   h2 {
     font-size: 2rem;

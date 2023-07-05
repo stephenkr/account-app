@@ -22,6 +22,7 @@ export const accountsReducer = createReducer(
   on(setAccounts, (state, { accounts }): State => ({
     ...state,
     accounts,
+    isFetchingAccounts: false
   })),
 
   on(fetchAccounts, (state): State => ({

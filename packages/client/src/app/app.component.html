@@ -13,6 +13,14 @@
       <span class="exchange-value"
         >: {{ exchangeRateBtcUsd$ | async | currency : 'USD' }}</span
       >
+
+      <!-- keeping the element here to prevent layout movement -->
+      <div class="loading-spinner">
+        <mat-spinner
+          *ngIf="exchangeRateFetching$ | async"
+          style="width: 15px; height: 15px"
+        ></mat-spinner>
+      </div>
     </div>
 
     <button
