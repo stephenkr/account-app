@@ -1,15 +1,15 @@
 import { Injectable } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Account } from './schema/accounts.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class AccountsService {
 
-  getAllAccounts() {
-    return [{
-      name: 'Hello world',
-      category: 'Random',
-      tags: ['test', 'another'],
-      balance: 10.00,
-      availableBalance: 1.00
-    }]
+  constructor(@InjectModel(Account.name) private accountModel: Model<Account>) { }
+
+  async getAllAccounts(): Promise<Account[]> {
+
+    return this.accountModel.find().exec()
   }
 }

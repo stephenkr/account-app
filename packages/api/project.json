@@ -58,6 +58,12 @@
           "codeCoverage": true
         }
       }
+    },
+    "seed": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "ts-node --project  packages/api/tsconfig.app.json packages/api/scripts/seed.ts"
+      }
     }
   },
   "tags": []
