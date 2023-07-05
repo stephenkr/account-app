@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
-import { selectAccounts } from 'app/store/accounts/accounts.selectors';
-import { Subscription } from 'rxjs';
+import { selectAccounts, selectExchangeRate } from 'app/store/accounts/accounts.selectors';
 import { Account } from 'app/store/accounts/types';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'account-app-account-table',
@@ -14,7 +14,8 @@ import { Account } from 'app/store/accounts/types';
 export class AccountTableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['account_name', 'category', 'tags', 'balance', 'available_balance'];
   dataSource = new MatTableDataSource<Account>([]);
-  $storeSubscription!: Subscription;
+  storeSubscriptions$: Subscription[] = [];
+  exchangeRateBtcUsd = 0;
 
   @ViewChild(MatSort) sort!: MatSort;
 
@@ -23,15 +24,29 @@ export class AccountTableComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
 
-    this.$storeSubscription = this.store.select(selectAccounts).subscribe({
-      next: (accounts) => {
-        this.dataSource = new MatTableDataSource(accounts)
-      }
-    })
+    // Subscribe to accounts for the table
+    this.storeSubscriptions$.push(
+      this.store.select(selectAccounts).subscribe({
+        next: (accounts) => {
+          this.dataSource = new MatTableDataSource(accounts)
+        }
+      })
+    )
+
+    // Subscribe to the exchange rate
+    this.storeSubscriptions$.push(
+      this.store.select(selectExchangeRate).subscribe({
+        next: (exchangeRateBtcUsd) => {
+          this.exchangeRateBtcUsd = exchangeRateBtcUsd
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {
-    this.$storeSubscription.unsubscribe()
+    this.storeSubscriptions$.forEach((subscription) => {
+      subscription.unsubscribe()
+    })
   }
 
   announceSortChange(sortState: Sort) {

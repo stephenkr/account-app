@@ -10,7 +10,9 @@
 
     <div class="toolbar-title mat-body">
       <mat-icon class="wrapped-icon">currency_bitcoin</mat-icon>
-      <span class="exchange-value">: $11,000</span>
+      <span class="exchange-value"
+        >: {{ exchangeRateBtcUsd$ | async | currency : 'USD' }}</span
+      >
     </div>
 
     <button

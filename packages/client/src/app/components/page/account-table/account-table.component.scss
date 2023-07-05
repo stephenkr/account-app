@@ -1,0 +1,28 @@
+.balance-cell {
+  text-align: right;
+}
+
+.account-table {
+  th {
+    color: #4f606e;
+    font-weight: 500;
+
+    &.mat-sort-header {
+      color: #29b192;
+    }
+  }
+
+  .mat-sort-header-indicator {
+    color: #29b192;
+  }
+
+  td {
+    color: #556572;
+    font-weight: 500;
+    padding: 15px;
+
+    &.nested-cell {
+      padding-left: 40px;
+    }
+  }
+}
