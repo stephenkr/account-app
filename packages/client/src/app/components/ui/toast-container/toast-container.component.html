@@ -1,0 +1,8 @@
+<div class="toast-window-container">
+  <div *ngIf="toast$ | async as toast" class="toast-container">
+    <span class="toast-message">{{ toast.message }}</span>
+    <button mat-icon-button class="icon-button" (click)="removeToast()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</div>

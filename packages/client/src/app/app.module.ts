@@ -16,6 +16,7 @@ import { BitcoinCurrencyPipe } from './pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from './pipes/exchange-rate.pipe';
 import { effectsModule, storeModule } from './store';
 import { JoinStringsPipe } from './pipes/join-strings.pipe';
+import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { JoinStringsPipe } from './pipes/join-strings.pipe';
     ExchangeRatePipe,
     BitcoinCurrencyPipe,
     JoinStringsPipe,
+    ToastContainerComponent,
   ],
   imports: [
     HttpClientModule,

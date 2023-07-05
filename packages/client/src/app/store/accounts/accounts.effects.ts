@@ -4,11 +4,12 @@ import { catchError, map, of, switchMap } from "rxjs";
 import { fetchAccounts, fetchExchangeRate, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "./accounts.actions";
 import { Injectable } from "@angular/core";
 import { AccountService } from "app/services/accounts.service";
+import { ToastService } from "app/services/toast.service";
 
 @Injectable()
 export class AccountsEffects {
 
-  constructor(private actions$: Actions, private exchangeRateService: ExchangeRateService, private accountService: AccountService) { }
+  constructor(private actions$: Actions, private exchangeRateService: ExchangeRateService, private accountService: AccountService, private toastService: ToastService) { }
 
   exchangeRate$ = createEffect(() => {
     return this.actions$.pipe(
@@ -21,6 +22,8 @@ export class AccountsEffects {
             exchangeRateBtcUsd: exchangeRate.usd,
           })),
           catchError(() => {
+            this.toastService.showToast('The exchange rate failed to load')
+
             return of(
               setExchangeRateLoadFailed()
             )
@@ -41,6 +44,8 @@ export class AccountsEffects {
             accounts
           })),
           catchError(() => {
+            this.toastService.showToast('The account list failed to load')
+
             return of(
               setAccountLoadFailed()
             )
