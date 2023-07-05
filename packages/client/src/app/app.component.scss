@@ -1,0 +1,33 @@
+.toolbar-container {
+  background-color: #f9fafc;
+  padding: 0;
+
+  .primary-button {
+    background-color: #29b192;
+    color: #fff;
+    border-radius: 1px;
+  }
+}
+
+.toolbar-title {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapped-icon.mat-icon {
+  width: 25px;
+  height: 25px;
+  background-color: #556572;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 99px;
+  font-size: 1rem;
+}
+
+.exchange-value {
+  margin-left: 5px;
+}
