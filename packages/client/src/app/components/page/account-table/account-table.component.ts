@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { fetchAccounts } from 'app/store/accounts/accounts.actions';
 import { selectAccounts, selectExchangeRate } from 'app/store/accounts/accounts.selectors';
 import { Account } from 'app/store/accounts/types';
 import { Subscription } from 'rxjs';
@@ -41,6 +42,8 @@ export class AccountTableComponent implements OnInit, OnDestroy {
         }
       })
     )
+
+    this.store.dispatch(fetchAccounts())
   }
 
   ngOnDestroy(): void {

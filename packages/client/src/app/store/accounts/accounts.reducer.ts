@@ -1,15 +1,12 @@
 import { createReducer, on } from "@ngrx/store";
-import { fetchExchangeRate, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "./accounts.actions";
+import { fetchAccounts, fetchExchangeRate, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "./accounts.actions";
 import { Account } from "./types";
 
 export const initialState = {
-  accounts: [{
-    name: 'Hello world',
-    category: 'Random',
-    tags: 'test',
-    balance: 10.00,
-    availableBalance: 1.00
-  }] as Account[],
+  accounts: [] as Account[],
+  isFetchingAccounts: false,
+  hasFetchingAccountsFailed: false,
+
   exchangeRateBtcUsd: 0,
   isFetchingExchangeRate: false,
   hasFetchingExchangeRateFailed: false
@@ -20,12 +17,26 @@ export type State = typeof initialState;
 export const accountsReducer = createReducer(
   initialState,
 
+  // account specific
+
   on(setAccounts, (state, { accounts }): State => ({
     ...state,
     accounts,
   })),
 
-  // exchange rate related
+  on(fetchAccounts, (state): State => ({
+    ...state,
+    isFetchingAccounts: true,
+    hasFetchingAccountsFailed: false,
+  })),
+
+  on(setAccountLoadFailed, (state): State => ({
+    ...state,
+    isFetchingAccounts: false,
+    hasFetchingAccountsFailed: true
+  })),
+
+  // exchange rate specific
 
   on(setExchangeRateBtcUsd, (state, { exchangeRateBtcUsd }): State => ({
     ...state,
