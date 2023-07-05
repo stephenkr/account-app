@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
+import { getRandomNumber } from './utils/getRandomNumber';
 
 @Controller('accounts')
 export class AccountsController {
@@ -15,7 +16,7 @@ export class AccountsController {
   getExchangeBtcUsdRate() {
     return {
       btc: 1,
-      usd: 1500
+      usd: getRandomNumber(5_000, 12_000)
     }
   }
 }

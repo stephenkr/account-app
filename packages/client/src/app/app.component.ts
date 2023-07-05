@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectExchangeRate, selectExchangeRateFetching } from './store/accounts/accounts.selectors';
 import { fetchExchangeRate } from './store/accounts/accounts.actions';
+import { SocketService } from './services/socket.service';
 
 @Component({
   selector: 'account-app-root',
@@ -11,7 +12,7 @@ import { fetchExchangeRate } from './store/accounts/accounts.actions';
 export class AppComponent implements OnInit {
   title = 'client';
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private socketService: SocketService) { }
 
   get exchangeRateBtcUsd$() {
     return this.store.select(selectExchangeRate)
@@ -23,5 +24,11 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(fetchExchangeRate())
+
+    this.socketService.onExchangeRateChange().subscribe({
+      next: () => {
+        this.store.dispatch(fetchExchangeRate())
+      }
+    })
   }
 }

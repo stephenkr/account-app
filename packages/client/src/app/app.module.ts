@@ -17,6 +17,7 @@ import { ExchangeRatePipe } from './pipes/exchange-rate.pipe';
 import { effectsModule, storeModule } from './store';
 import { JoinStringsPipe } from './pipes/join-strings.pipe';
 import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
+import { socketModule } from './lib/socket';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { ToastContainerComponent } from './components/ui/toast-container/toast-c
       maxAge: 25,
       logOnly: environment.production,
     }),
+    socketModule
   ],
   providers: [],
   bootstrap: [AppComponent],
