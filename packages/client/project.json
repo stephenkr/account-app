@@ -20,7 +20,7 @@
           "packages/client/src/assets"
         ],
         "styles": [
-          "@angular/material/prebuilt-themes/deeppurple-amber.css",
+          "packages/client/src/styles/theme.scss",
           "packages/client/src/styles/global.scss"
         ],
         "scripts": []
