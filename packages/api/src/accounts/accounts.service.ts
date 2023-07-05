@@ -7,7 +7,7 @@ export class AccountsService {
     return [{
       name: 'Hello world',
       category: 'Random',
-      tags: 'test',
+      tags: ['test', 'another'],
       balance: 10.00,
       availableBalance: 1.00
     }]

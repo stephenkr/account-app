@@ -15,6 +15,7 @@ import { NxWelcomeComponent } from './nx-welcome.component';
 import { BitcoinCurrencyPipe } from './pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from './pipes/exchange-rate.pipe';
 import { effectsModule, storeModule } from './store';
+import { JoinStringsPipe } from './pipes/join-strings.pipe';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { effectsModule, storeModule } from './store';
     PageContainerComponent,
     ExchangeRatePipe,
     BitcoinCurrencyPipe,
+    JoinStringsPipe,
   ],
   imports: [
     HttpClientModule,
@@ -37,7 +39,7 @@ import { effectsModule, storeModule } from './store';
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
-    })
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent],
