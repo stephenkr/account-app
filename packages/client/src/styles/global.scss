@@ -17,7 +17,18 @@ body {
   margin: 0 auto;
 }
 
+// some css helper classes
+
 .flex-inline {
   display: flex;
   align-items: center;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.color-primary {
+  color: $color-primary;
 }

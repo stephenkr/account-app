@@ -17,3 +17,8 @@ $my-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($my-theme);
+
+.table-paginator .mat-mdc-paginator-container {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}

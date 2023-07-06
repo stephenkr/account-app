@@ -5,6 +5,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 export const materialModules = [
   MatToolbarModule,
@@ -13,5 +17,9 @@ export const materialModules = [
   MatTableModule,
   MatSortModule,
   MatProgressSpinnerModule,
-  MatChipsModule
+  MatChipsModule,
+  MatPaginatorModule,
+  MatFormFieldModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ]
