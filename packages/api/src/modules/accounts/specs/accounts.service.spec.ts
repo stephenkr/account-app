@@ -54,6 +54,18 @@ describe('AccountsService', () => {
     })
   })
 
+  describe('getAccountById', () => {
+
+    it('returns the correct account by id', async () => {
+      await testDatabase.seed('accounts', getAccountCollection(5))
+      const accounts = await service.getAllAccounts()
+
+      const foundAccount = await service.getAccountById(accounts[0].id)
+
+      expect(foundAccount.name).toBe(accounts[0].name)
+    })
+  })
+
   describe('updateRandomAccount', () => {
     it('should update a random account document', async () => {
       await testDatabase.seed('accounts', getAccountCollection(5))
@@ -64,7 +76,7 @@ describe('AccountsService', () => {
 
       const originalAccount = accounts.find((account: AccountDocument) => changedAccount.equals(account))
 
-      expect(changedAccount._id.toString()).toBe(originalAccount._id.toString())
+      expect(changedAccount.id).toBe(originalAccount.id)
       expect(originalAccount.balance).not.toBe(changedAccount.balance)
     })
   })
