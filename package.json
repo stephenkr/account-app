@@ -7,7 +7,8 @@
     "serve:api": "nx serve api",
     "seed:api": "nx run api:seed",
     "test:client": "nx test client",
-    "test:api": "nx test api"
+    "test:api": "nx test api",
+    "lint:all": "nx lint client && nx lint api"
   },
   "private": true,
   "dependencies": {
