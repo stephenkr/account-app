@@ -17,8 +17,3 @@ $my-theme: mat.define-light-theme(
 );
 
 @include mat.all-component-themes($my-theme);
-
-.mat-body {
-  font-size: 1rem;
-  color: #556572;
-}

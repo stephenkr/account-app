@@ -1,6 +1,8 @@
+@import 'src/styles/variables.scss';
+
 .outer-container {
-  background-color: #fff;
-  border: solid #e7e8ea;
+  background-color: $color-white;
+  border: solid $color-border-base;
   border-width: 1px 0;
   padding: 25px 0;
 }
@@ -21,7 +23,7 @@
     font-weight: 100;
     margin: 0;
 
-    color: #556572;
+    color: $color-text-base;
   }
 
   .breadcrumbs {
@@ -29,11 +31,11 @@
     font-size: 1rem;
 
     .item {
-      color: #556572;
+      color: $color-text-base;
 
       &.active {
         font-weight: 500;
-        color: #4f606e;
+        color: $color-text-accent;
       }
     }
 

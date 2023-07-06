@@ -1,19 +1,21 @@
+@import 'src/styles/variables.scss';
+
 .balance-cell {
   text-align: right;
 }
 
 .account-table {
   th {
-    color: #4f606e;
+    color: $color-text-accent;
     font-weight: 500;
 
     &.mat-sort-header {
-      color: #29b192;
+      color: $color-primary;
     }
   }
 
   td {
-    color: #556572;
+    color: $color-text-base;
     font-weight: 500;
     padding: 15px;
 

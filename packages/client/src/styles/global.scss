@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'src/styles/variables.scss';
 
 html,
 body {
@@ -8,8 +8,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
-  background-color: #f9fafc;
-  color: #556572;
+  background-color: $color-base;
+  color: $color-text-base;
 }
 
 .global-container {

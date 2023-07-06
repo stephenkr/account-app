@@ -1,10 +1,12 @@
+@import 'src/styles/variables.scss';
+
 .toolbar-container {
-  background-color: #f9fafc;
+  background-color: $color-base;
   padding: 0;
 
   .primary-button {
-    background-color: #29b192;
-    color: #fff;
+    background-color: $color-primary;
+    color: $color-white;
     border-radius: 1px;
   }
 }
@@ -14,13 +16,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1rem;
+  color: $color-text-base;
 }
 
 .wrapped-icon.mat-icon {
   width: 25px;
   height: 25px;
-  background-color: #556572;
-  color: #fff;
+  background-color: $color-text-base;
+  color: $color-white;
   display: flex;
   justify-content: center;
   align-items: center;
