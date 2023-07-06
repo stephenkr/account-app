@@ -5,7 +5,7 @@ export interface TestDatabase {
   connection: Connection;
   down: () => Promise<void>;
   reset: () => Promise<void>;
-  seed: (key: string, documents: unknown[]) => Promise<void>;
+  seed: (key, documents) => Promise<void>;
 }
 
 export const getTestDatabase = async (): Promise<TestDatabase> => {
