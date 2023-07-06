@@ -8,7 +8,7 @@
   [isFetching]="isFetchingSelectedAccount$ | async"
 />
 
-<div *ngIf="selectedAccount$ | async; let selectedAccount">
+<div *ngIf="selectedAccount$ | async as selectedAccount">
   <account-app-account-detail-inner
     [selectedAccount]="selectedAccount"
     [exchangeRateBtcUsd]="exchangeRateBtcUsd$ | async"

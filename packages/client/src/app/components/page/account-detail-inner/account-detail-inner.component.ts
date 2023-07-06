@@ -14,9 +14,21 @@ export class AccountDetailInnerComponent {
   @Input() exchangeRateBtcUsd: number | null = 0;
   @Input() transactions: Transaction[] | null = []
 
-  displayedColumns: string[] = ['confirmed_date', 'order_id', 'order_code', 'type', 'debit', 'credit', 'balance'];
+  displayedColumns: string[] = [
+    'confirmed_date',
+    'order_id',
+    'order_code',
+    'type',
+    'debit',
+    'credit',
+    'balance'
+  ];
 
   get transactionDataSource() {
-    return getSortedTransactionCollection(new MatTableDataSource<Transaction>(this.transactions || []).data)
+    return getSortedTransactionCollection(
+      new MatTableDataSource<Transaction>(
+        this.transactions || []
+      ).data
+    )
   }
 }

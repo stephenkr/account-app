@@ -1,13 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { AccountDetailInnerComponent } from './account-detail-inner.component';
-import { PageDetailTitleComponent } from 'app/components/ui/page-detail-title/page-detail-title.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PageContainerComponent } from 'app/components/ui/page-container/page-container.component';
+import { PageDetailTitleComponent } from 'app/components/ui/page-detail-title/page-detail-title.component';
+import { RowHighlightDirective } from 'app/directives/row-highlight.directive';
 import { materialModules } from 'app/lib/material-ui';
 import { BitcoinCurrencyPipe } from 'app/pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from 'app/pipes/exchange-rate.pipe';
+import { TransactionTypePipe } from 'app/pipes/transaction-type.pipe';
 import { generateAccountWithChange } from 'app/tests/account.testfactory';
-import { RowHighlightDirective } from 'app/directives/row-highlight.directive';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { getTransactionCollection } from 'app/tests/transaction.testfactory';
+import { AccountDetailInnerComponent } from './account-detail-inner.component';
 
 describe('AccountDetailInnerComponent', () => {
   let component: AccountDetailInnerComponent;
@@ -21,7 +23,8 @@ describe('AccountDetailInnerComponent', () => {
         PageContainerComponent,
         BitcoinCurrencyPipe,
         ExchangeRatePipe,
-        RowHighlightDirective
+        RowHighlightDirective,
+        TransactionTypePipe
       ],
       imports: [
         NoopAnimationsModule,
@@ -37,5 +40,15 @@ describe('AccountDetailInnerComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create the table with the rows', () => {
+    component.transactions = getTransactionCollection(10)
+
+    fixture.detectChanges()
+
+    const rows = fixture.nativeElement.querySelectorAll('tbody tr')
+
+    expect(rows.length).toBe(10);
   });
 });

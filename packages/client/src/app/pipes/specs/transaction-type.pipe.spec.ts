@@ -1,5 +1,5 @@
 import { TransactionType } from 'app/store/transactions/types';
-import { TransactionTypePipe } from './transaction-type.pipe';
+import { TransactionTypePipe } from '../transaction-type.pipe';
 
 describe('TransactionTypePipe', () => {
   it('returns the correct copy for `received`', () => {

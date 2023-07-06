@@ -19,3 +19,7 @@ export const generateTransaction = (overrides: Partial<Transaction> = {}): Trans
     ...overrides
   }
 }
+
+export const getTransactionCollection = (howMany: number) =>
+  new Array(howMany).fill(null).map(() => generateTransaction())
+
