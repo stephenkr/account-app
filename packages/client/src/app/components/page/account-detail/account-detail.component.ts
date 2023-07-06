@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { fetchSelectedAccount } from 'app/store/accounts/accounts.actions';
 import { selectExchangeRate, selectSelectedAccount, selectSelectedAccountFetching } from 'app/store/accounts/accounts.selectors';
+import { fetchTransactions } from 'app/store/transactions/transactions.actions';
+import { selectTransactions } from 'app/store/transactions/transactions.selectors';
 import { of, tap } from 'rxjs';
 
 @Component({
@@ -19,6 +21,9 @@ export class AccountDetailComponent implements OnInit {
     if (typeof accountId === 'string') {
       this.store.dispatch(fetchSelectedAccount({
         id: accountId
+      }))
+      this.store.dispatch(fetchTransactions({
+        accountId
       }))
       return;
     }
@@ -44,4 +49,7 @@ export class AccountDetailComponent implements OnInit {
     )
   }
 
+  get accountTransactions$() {
+    return this.store.select(selectTransactions)
+  }
 }

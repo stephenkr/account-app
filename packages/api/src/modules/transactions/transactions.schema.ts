@@ -5,9 +5,6 @@ export type TransactionDocument = HydratedDocument<Transaction>;
 
 @Schema()
 export class Transaction {
-  @Prop({ required: true })
-  name: string;
-
   @Prop({ type: Date })
   confirmedDate: Date;
 

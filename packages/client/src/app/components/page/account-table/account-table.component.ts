@@ -17,7 +17,7 @@ import { Subscription } from 'rxjs';
 export class AccountTableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['account_name', 'category', 'tags', 'balance', 'available_balance'];
   dataSource = new MatTableDataSource<AccountWithChange>([]);
-  storeSubscriptions$: Subscription[] = [];
+  subscriptions$: Subscription[] = [];
   exchangeRateBtcUsd = 0;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -28,7 +28,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
     this.dataSource.sort = this.sort;
 
     // Subscribe to accounts for the table
-    this.storeSubscriptions$.push(
+    this.subscriptions$.push(
       this.store.select(selectAccounts).subscribe({
         next: (accounts) => {
           this.dataSource = new MatTableDataSource(accounts)
@@ -37,7 +37,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
     )
 
     // Subscribe to the exchange rate
-    this.storeSubscriptions$.push(
+    this.subscriptions$.push(
       this.store.select(selectExchangeRate).subscribe({
         next: (exchangeRateBtcUsd) => {
           this.exchangeRateBtcUsd = exchangeRateBtcUsd
@@ -47,15 +47,17 @@ export class AccountTableComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(fetchAccounts())
 
-    this.socketService.onAccountChange().subscribe({
-      next: () => {
-        this.store.dispatch(fetchAccounts())
-      }
-    })
+    this.subscriptions$.push(
+      this.socketService.onAccountChange().subscribe({
+        next: () => {
+          this.store.dispatch(fetchAccounts())
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {
-    this.storeSubscriptions$.forEach((subscription) => {
+    this.subscriptions$.forEach((subscription) => {
       subscription.unsubscribe()
     })
   }

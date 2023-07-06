@@ -1,6 +1,6 @@
 import { Seeder } from 'mongo-seeding'
-import { SeederCollection } from 'mongo-seeding/dist/common'
-import path from 'path'
+import { accountDocuments } from './seeds/accounts'
+import { transactionDocuments } from './seeds/transactions';
 
 const seeder = new Seeder({
   database: {
@@ -9,29 +9,13 @@ const seeder = new Seeder({
   dropDatabase: true
 })
 
-const collections = seeder.readCollectionsFromPath(
-  path.join(__dirname, './'),
-  {
-    extensions: ['js', 'json', 'ts'],
-    transformers: [
-      (collection: SeederCollection) => {
-        const seedFile = collection.documents[0] as {
-          name: string;
-          documents: unknown[]
-        }
-
-        const name = seedFile.name || ''
-        const documents = seedFile.documents || []
-
-        return {
-          orderNo: undefined,
-          name,
-          documents
-        }
-      }
-    ]
-  },
-)
+const collections = [{
+  name: 'accounts',
+  documents: accountDocuments
+}, {
+  name: 'transactions',
+  documents: transactionDocuments
+}]
 
 seeder
   .import(collections)

@@ -34,7 +34,7 @@ export class TransactionsService {
 
     await this.transactionModel.collection.insertOne({
       accountId,
-      dateConfirmed: new Date(),
+      confirmedDate: new Date(),
       orderId: nanoid(5),
       orderCode: nanoid(8),
       type,

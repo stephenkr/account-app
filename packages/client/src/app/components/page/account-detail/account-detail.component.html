@@ -7,18 +7,14 @@
   ]"
 />
 
-<div
-  *ngIf="isFetchingSelectedAccount$ | async; else readyView"
-  class="loading-container"
->
+<div *ngIf="isFetchingSelectedAccount$ | async" class="loading-container">
   <mat-spinner color="accent" />
 </div>
 
-<ng-template #readyView>
-  <div *ngIf="selectedAccount$ | async; let selectedAccount">
-    <account-app-account-detail-inner
-      [selectedAccount]="selectedAccount"
-      [exchangeRateBtcUsd]="exchangeRateBtcUsd$ | async"
-    />
-  </div>
-</ng-template>
+<div *ngIf="selectedAccount$ | async; let selectedAccount">
+  <account-app-account-detail-inner
+    [selectedAccount]="selectedAccount"
+    [exchangeRateBtcUsd]="exchangeRateBtcUsd$ | async"
+    [transactions]="accountTransactions$ | async"
+  />
+</div>
