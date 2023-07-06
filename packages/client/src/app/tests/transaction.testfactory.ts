@@ -9,8 +9,8 @@ export const generateTransaction = (overrides: Partial<Transaction> = {}): Trans
   return {
     id: faker.string.uuid(),
     confirmedDate: new Date(),
-    orderId: nanoid(5),
-    orderCode: nanoid(8),
+    orderId: nanoid(5).toUpperCase(),
+    orderCode: nanoid(8).toUpperCase(),
     type: TransactionType.Received,
     debit: 0,
     credit: balance,

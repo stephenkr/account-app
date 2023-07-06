@@ -12,7 +12,7 @@ export const getTransactionBalance = (newBalance, previousBalance) => {
   }
 
   return {
-    debit: changeInBalance,
+    debit: Math.abs(changeInBalance),
     credit: 0,
     type: TransactionType.Sent
   }

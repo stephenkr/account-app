@@ -6,8 +6,8 @@ import mongoose from 'mongoose'
 export const transactionDocuments = accountDocuments.map((account) => ({
   _id: new mongoose.mongo.ObjectId(faker.database.mongodbObjectId()),
   confirmedDate: new Date(),
-  orderId: nanoid(5),
-  orderCode: nanoid(8),
+  orderId: nanoid(5).toUpperCase(),
+  orderCode: nanoid(8).toUpperCase(),
   type: 'received',
   debit: 0,
   credit: account.balance,

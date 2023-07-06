@@ -1,9 +1,10 @@
-import { nanoid } from 'nanoid'
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Transaction, TransactionDocument } from './transactions.schema';
 import { Model } from 'mongoose';
-import { getTransactionBalance } from './utils/getTransactionBalance.utils';
+import { getTransactionBalance } from './utils/getTransactionBalance';
+import { getOrderId } from './utils/getOrderId';
+import { getOrderCode } from './utils/getOrderCode';
 
 interface InsertProps {
   accountId: string
@@ -35,8 +36,8 @@ export class TransactionsService {
     await this.transactionModel.collection.insertOne({
       accountId,
       confirmedDate: new Date(),
-      orderId: nanoid(5),
-      orderCode: nanoid(8),
+      orderId: getOrderId(),
+      orderCode: getOrderCode(),
       type,
       debit,
       credit,
