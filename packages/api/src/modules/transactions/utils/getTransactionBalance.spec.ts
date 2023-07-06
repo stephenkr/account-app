@@ -4,7 +4,7 @@ import { getTransactionBalance } from './getTransactionBalance'
 describe('getTransactionBalance', () => {
   it('should return the `credit` amount if money is added', () => {
     const actual = getTransactionBalance(
-      1000,
+      1_000,
       500
     )
 
@@ -18,12 +18,12 @@ describe('getTransactionBalance', () => {
   it('should return the `debit` amount if money is removed', () => {
     const actual = getTransactionBalance(
       500,
-      1500
+      1_500
     )
 
     expect(actual).toEqual({
       credit: 0,
-      debit: 1000,
+      debit: 1_000,
       type: TransactionType.Sent
     })
   })

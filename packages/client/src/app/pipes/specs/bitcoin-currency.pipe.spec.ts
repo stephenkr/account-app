@@ -7,7 +7,7 @@ describe('BitcoinCurrencyPipe', () => {
   });
 
   it('returns the value with the Bitcoin currency format', () => {
-    const actual = new BitcoinCurrencyPipe().transform(1000)
+    const actual = new BitcoinCurrencyPipe().transform(1_000)
 
     expect(actual).toBe(`1000 BTC`)
   })
