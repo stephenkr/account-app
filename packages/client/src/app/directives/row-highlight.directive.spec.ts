@@ -1,6 +1,5 @@
 import { ChangeDirection } from 'app/store/accounts/types';
 import { RowHighlightDirective } from './row-highlight.directive';
-import { SimpleChanges } from '@angular/core';
 
 describe('RowHighlightDirective', () => {
   it('should create an instance', () => {
