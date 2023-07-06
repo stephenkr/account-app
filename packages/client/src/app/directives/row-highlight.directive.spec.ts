@@ -11,7 +11,7 @@ describe('RowHighlightDirective', () => {
     const directive = new RowHighlightDirective();
 
     directive.accountAppRowHighlight = ChangeDirection.Increase
-    directive.ngOnInit()
+    directive.ngOnChanges()
     const actual = directive.elementClass
 
     expect(actual).toBe(`flash-increase`)
@@ -21,7 +21,7 @@ describe('RowHighlightDirective', () => {
     const directive = new RowHighlightDirective();
 
     directive.accountAppRowHighlight = ChangeDirection.Decrease
-    directive.ngOnInit()
+    directive.ngOnChanges()
     const actual = directive.elementClass
 
     expect(actual).toBe(`flash-decrease`)
@@ -31,7 +31,7 @@ describe('RowHighlightDirective', () => {
     const directive = new RowHighlightDirective();
 
     directive.accountAppRowHighlight = ChangeDirection.NoChange
-    directive.ngOnInit()
+    directive.ngOnChanges()
     const actual = directive.elementClass
 
     expect(actual).toBe(`flash-no-change`)

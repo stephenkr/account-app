@@ -1,18 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { MatTableDataSource } from '@angular/material/table';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { PageContainerComponent } from 'app/components/ui/page-container/page-container.component';
 import { PageTitleComponent } from 'app/components/ui/page-title/page-title.component';
+import { RowHighlightDirective } from 'app/directives/row-highlight.directive';
 import { materialModules } from 'app/lib/material-ui';
-import { getMockStore } from 'app/tests/store.mock';
-import { AccountTableComponent } from './account-table.component';
-import { getAccountCollection, getAccountWithChangeCollection } from 'app/tests/account.testfactory';
-import { of } from 'rxjs';
-import { MatTableDataSource } from '@angular/material/table';
-import { JoinStringsPipe } from 'app/pipes/join-strings.pipe';
+import { socketModule } from 'app/lib/socket';
 import { BitcoinCurrencyPipe } from 'app/pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from 'app/pipes/exchange-rate.pipe';
-import { socketModule } from 'app/lib/socket';
-import { RowHighlightDirective } from 'app/directives/row-highlight.directive';
+import { JoinStringsPipe } from 'app/pipes/join-strings.pipe';
+import { getAccountWithChangeCollection } from 'app/tests/account.testfactory';
+import { getMockStore } from 'app/tests/store.mock';
+import { AccountTableComponent } from './account-table.component';
 
 describe('AccountTableComponent', () => {
   let component: AccountTableComponent;

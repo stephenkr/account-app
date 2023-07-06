@@ -5,7 +5,9 @@
   "scripts": {
     "serve:client": "nx serve client",
     "serve:api": "nx serve api",
-    "seed:api": "nx run api:seed"
+    "seed:api": "nx run api:seed",
+    "test:client": "nx test client",
+    "test:api": "nx test api"
   },
   "private": true,
   "dependencies": {
