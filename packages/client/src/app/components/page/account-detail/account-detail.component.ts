@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SocketService } from 'app/services/socket.service';
-import { fetchSelectedAccount } from 'app/store/accounts/accounts.actions';
-import { selectExchangeRate, selectSelectedAccount, selectSelectedAccountFetching } from 'app/store/accounts/accounts.selectors';
+import { clearSelectedAccount, fetchSelectedAccount } from 'app/store/accounts/accounts.actions';
+import { selectExchangeRate, selectSelectedAccount, selectSelectedAccountFailed, selectSelectedAccountFetching } from 'app/store/accounts/accounts.selectors';
 import { fetchTransactions } from 'app/store/transactions/transactions.actions';
 import { selectTransactions } from 'app/store/transactions/transactions.selectors';
-import { Subscription, tap } from 'rxjs';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'account-app-account-detail',
@@ -24,34 +24,45 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    const accountId = this.activatedRoute.snapshot.paramMap.get('id')
+    this.requestDetailData(
+      this.activatedRoute.snapshot.paramMap.get('id')
+    )
 
-    if (typeof accountId === 'string') {
-      this.store.dispatch(fetchSelectedAccount({
-        id: accountId
-      }))
-      this.store.dispatch(fetchTransactions({
-        accountId
-      }))
+    this.store.select(selectSelectedAccountFailed).subscribe((hasFailed) => {
+      if (hasFailed) {
+        this.router.navigate([''])
+      }
+    })
+  }
 
-      this.socketSubscription = this.socketService.onAccountChange().subscribe({
-        next: () => {
-          this.store.dispatch(fetchSelectedAccount({
-            id: accountId
-          }))
-          this.store.dispatch(fetchTransactions({
-            accountId
-          }))
-        }
-      })
-
+  requestDetailData(accountId: string | null) {
+    if (typeof accountId !== 'string') {
+      this.router.navigate([''])
       return;
     }
 
-    this.router.navigate([''])
+    this.store.dispatch(fetchSelectedAccount({
+      id: accountId
+    }))
+    this.store.dispatch(fetchTransactions({
+      accountId
+    }))
+
+    this.socketSubscription = this.socketService.onAccountChange().subscribe({
+      next: () => {
+        this.store.dispatch(fetchSelectedAccount({
+          id: accountId
+        }))
+        this.store.dispatch(fetchTransactions({
+          accountId
+        }))
+      }
+    })
   }
 
   ngOnDestroy(): void {
+    this.store.dispatch(clearSelectedAccount())
+
     if (this.socketSubscription) {
       this.socketSubscription.unsubscribe()
     }
@@ -66,13 +77,7 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
   }
 
   get selectedAccount$() {
-    return this.store.select(selectSelectedAccount).pipe(
-      tap((selectedAccount) => {
-        if (!selectedAccount) {
-          this.router.navigate([''])
-        }
-      })
-    )
+    return this.store.select(selectSelectedAccount)
   }
 
   get accountTransactions$() {

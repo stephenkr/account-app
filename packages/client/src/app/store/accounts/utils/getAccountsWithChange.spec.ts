@@ -94,5 +94,26 @@ describe('getAccountsWithChange', () => {
         changeDirection: ChangeDirection.Increase
       })
     })
+
+    it('should not update the document if the original document id is different than the new ', () => {
+      const originalAccount = {
+        ...generateAccount(),
+        balance: 1,
+        availableBalance: 2
+      }
+
+      const newAccount = {
+        ...generateAccount(),
+        balance: 10,
+        availableBalance: 15
+      }
+
+      const actual = getSingleAccountWithChange(originalAccount, newAccount)
+
+      expect(actual).toEqual({
+        ...newAccount,
+        changeDirection: ChangeDirection.NoChange
+      })
+    })
   })
 })

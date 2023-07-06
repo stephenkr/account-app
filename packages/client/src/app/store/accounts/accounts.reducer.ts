@@ -1,5 +1,5 @@
 import { createReducer, on } from "@ngrx/store";
-import { fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
+import { clearSelectedAccount, fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
 import { AccountWithChange } from "./types";
 import { getAccountsWithChange, getSingleAccountWithChange } from "./utils/getAccountsWithChange";
 
@@ -51,6 +51,11 @@ export const accountsReducer = createReducer(
       account
     ),
     isFetchingSelectedAccount: false
+  })),
+
+  on(clearSelectedAccount, (state): State => ({
+    ...state,
+    selectedAccount: null
   })),
 
   on(fetchSelectedAccount, (state): State => ({

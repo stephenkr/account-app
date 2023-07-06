@@ -8,6 +8,7 @@ export const selectAccountsFetching = createSelector(selectAccountState, (state)
 
 export const selectSelectedAccount = createSelector(selectAccountState, (state) => state.selectedAccount)
 export const selectSelectedAccountFetching = createSelector(selectAccountState, (state) => state.isFetchingSelectedAccount)
+export const selectSelectedAccountFailed = createSelector(selectAccountState, (state) => state.hasFetchingSelectedAccountFailed)
 
 export const selectExchangeRate = createSelector(selectAccountState, (state) => state.exchangeRateBtcUsd)
 export const selectExchangeRateFetching = createSelector(selectAccountState, (state) => state.isFetchingExchangeRate)

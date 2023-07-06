@@ -13,13 +13,22 @@ export const getChangeDirection = (originalValue: number | undefined | null, new
 }
 
 export const getSingleAccountWithChange = (originalDocument: Account | undefined | null, newDocument: Account): AccountWithChange => {
-  return {
+  if (originalDocument?.id !== newDocument.id) {
+    return {
+      ...newDocument,
+      changeDirection: ChangeDirection.NoChange
+    }
+  }
+
+  const output = {
     ...newDocument,
     changeDirection: getChangeDirection(
       originalDocument?.availableBalance,
       newDocument.availableBalance
     )
   }
+
+  return output
 }
 
 export const getAccountsWithChange = (originalCollection: Account[], newCollection: Account[]): AccountWithChange[] => {

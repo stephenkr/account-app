@@ -5,7 +5,8 @@ export const setAccounts = createAction('[ACCOUNTS] set accounts', props<{ accou
 export const fetchAccounts = createAction('[ACCOUNTS] fetch accounts')
 export const setAccountLoadFailed = createAction('[ACCOUNTS] fetch accounts failed')
 
-export const setSelectedAccount = createAction('[ACCOUNTS] set selected accounts', props<{ account: Account }>())
+export const setSelectedAccount = createAction('[ACCOUNTS] set selected account', props<{ account: Account }>())
+export const clearSelectedAccount = createAction('[ACCOUNTS] clear selected account')
 export const fetchSelectedAccount = createAction('[ACCOUNTS] fetch selected account', props<{ id: string }>())
 export const setSelectedAccountLoadFailed = createAction('[ACCOUNTS] fetch selected account failed')
 
