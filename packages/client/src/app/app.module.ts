@@ -18,6 +18,7 @@ import { JoinStringsPipe } from './pipes/join-strings.pipe';
 import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
 import { socketModule } from './lib/socket';
 import { RowHighlightDirective } from './directives/row-highlight.directive';
+import { AccountDetailComponent } from './components/page/account-detail/account-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { RowHighlightDirective } from './directives/row-highlight.directive';
     JoinStringsPipe,
     ToastContainerComponent,
     RowHighlightDirective,
+    AccountDetailComponent,
   ],
   imports: [
     HttpClientModule,
@@ -43,9 +45,9 @@ import { RowHighlightDirective } from './directives/row-highlight.directive';
       maxAge: 25,
       logOnly: environment.production,
     }),
-    socketModule
+    socketModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -25,6 +25,12 @@
   }
 
   tr {
+    cursor: pointer;
+
+    &:hover {
+      background-color: $color-base;
+    }
+
     &.flash-increase {
       animation: backgroundFlashIncrease 1s ease-in-out 0s;
     }

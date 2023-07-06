@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { SocketService } from 'app/services/socket.service';
 import { fetchAccounts } from 'app/store/accounts/accounts.actions';
@@ -21,7 +22,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private store: Store, private socketService: SocketService) { }
+  constructor(private store: Store, private socketService: SocketService, private router: Router) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -61,6 +62,10 @@ export class AccountTableComponent implements OnInit, OnDestroy {
 
   get isFetchingAccounts$() {
     return this.store.select(selectAccountsFetching)
+  }
+
+  openAccountDetail(rowId: string) {
+    this.router.navigate([rowId])
   }
 
   // TODO: Add sort ability

@@ -29,13 +29,25 @@
   .breadcrumbs {
     margin-top: 10px;
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+
+      &:last-child .item {
+        font-weight: 500;
+        color: $color-text-accent;
+      }
+    }
 
     .item {
       color: $color-text-base;
 
-      &.active {
-        font-weight: 500;
-        color: $color-text-accent;
+      &.is-link:hover {
+        cursor: pointer;
+        text-decoration: underline;
       }
     }
 

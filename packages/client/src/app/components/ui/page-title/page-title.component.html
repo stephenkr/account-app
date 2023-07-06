@@ -1,7 +1,7 @@
 <div class="outer-container">
   <div class="inner-container global-container">
     <div class="title">
-      <h2>Accounts</h2>
+      <h2>{{ title }}</h2>
       <!-- keeping the element here to prevent layout movement -->
       <div class="loading-spinner">
         <mat-spinner
@@ -13,9 +13,18 @@
     </div>
 
     <div class="breadcrumbs">
-      <a class="item">Home</a>
-      <span class="spacer">/</span>
-      <a class="active item">Accounts</a>
+      <div
+        *ngFor="let breadcrumb of breadcrumbs; let i = index"
+        class="breadcrumb"
+      >
+        <span *ngIf="i > 0" class="spacer">/</span>
+        <a
+          class="item"
+          [ngClass]="{ 'is-link': breadcrumb.path }"
+          (click)="openBreadcrumb(breadcrumb.path)"
+          >{{ breadcrumb.title }}</a
+        >
+      </div>
     </div>
   </div>
 </div>

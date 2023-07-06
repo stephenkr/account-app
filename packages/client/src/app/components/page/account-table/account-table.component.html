@@ -1,4 +1,8 @@
-<account-app-page-title [isFetching]="isFetchingAccounts$ | async" />
+<account-app-page-title
+  title="Account detail"
+  [breadcrumbs]="[{ path: '/', title: 'Home' }, { title: 'Accounts' }]"
+  [isFetching]="isFetchingAccounts$ | async"
+/>
 
 <account-app-page-container>
   <table
@@ -80,6 +84,7 @@
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       [accountAppRowHighlight]="row.changeDirection"
+      (click)="openAccountDetail(row.id)"
     ></tr>
   </table>
 </account-app-page-container>
