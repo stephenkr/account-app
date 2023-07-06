@@ -5,6 +5,8 @@ import { getModelToken } from '@nestjs/mongoose';
 import { Account, AccountDocument } from '../accounts.schema';
 import { ExchangeRateService } from '../services/exchange-rate/exchange-rate.service';
 import { getAccountCollection } from 'src/test/account.testfactory';
+import { TransactionsService } from 'src/modules/transactions/transactions.service';
+import { Transaction } from 'src/modules/transactions/transactions.schema';
 
 describe('AccountsController', () => {
   let controller: AccountsController;
@@ -21,7 +23,9 @@ describe('AccountsController', () => {
           }
         },
         ExchangeRateService,
+        TransactionsService,
         { provide: getModelToken(Account.name), useValue: Account },
+        { provide: getModelToken(Transaction.name), useValue: Transaction },
       ],
     }).compile();
 
