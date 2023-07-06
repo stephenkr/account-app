@@ -1,0 +1,84 @@
+@import 'src/styles/variables.scss';
+
+.outer-container {
+  background-color: $color-white;
+  border: solid $color-border-base;
+  border-width: 1px 0;
+  padding: 25px 0;
+  margin: 25px 0;
+}
+
+.sub-text {
+  font-size: 0.9rem;
+  color: $color-text-base;
+  margin: 0;
+  margin-top: 5px;
+}
+
+.account-title-container {
+  .account-title {
+    margin: 0;
+    font-weight: 100;
+    color: $color-text-base;
+    font-size: 1.3rem;
+
+    + .chip {
+      margin-left: 15px;
+      background-color: lighten($color: $color-active, $amount: 20);
+      height: 25px;
+    }
+  }
+}
+
+.balance-title-container {
+  margin: 0;
+  padding: 25px 0;
+
+  .btc-amount,
+  .usd-amount {
+    color: $color-primary;
+    font-size: 3rem;
+    margin: 0;
+  }
+
+  .btc-amount {
+    font-weight: 500;
+  }
+
+  .usd-amount {
+    font-weight: 200;
+  }
+}
+
+.available-balance-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .available-balance-title {
+    font-size: 1.3rem;
+    color: $color-text-base;
+    margin: 0;
+    font-weight: 400;
+
+    span + span {
+      margin-left: 5px;
+    }
+  }
+
+  .expand-action {
+    color: $color-active;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .icon {
+      margin-left: 5px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

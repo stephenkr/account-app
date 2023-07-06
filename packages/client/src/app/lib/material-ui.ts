@@ -4,6 +4,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatChipsModule } from '@angular/material/chips';
 
 export const materialModules = [
   MatToolbarModule,
@@ -11,5 +12,6 @@ export const materialModules = [
   MatButtonModule,
   MatTableModule,
   MatSortModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatChipsModule
 ]

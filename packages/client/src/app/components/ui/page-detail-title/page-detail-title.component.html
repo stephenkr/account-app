@@ -1,0 +1,43 @@
+<div class="outer-container">
+  <div class="inner-container global-container">
+    <div class="account-title-container">
+      <div class="flex-inline">
+        <h5 class="account-title">{{ title }}</h5>
+        <mat-chip class="chip">Active</mat-chip>
+      </div>
+      <p class="sub-text">Treasury account</p>
+    </div>
+
+    <div class="balance-title-container">
+      <div class="flex-inline">
+        <span class="btc-amount">
+          {{ btcBalance | bitcoinCurrency }}
+        </span>
+        <span class="usd-amount">
+          ({{
+            btcBalance | exchangeRate : exchangeRateBtcUsd | currency : 'USD'
+          }})
+        </span>
+      </div>
+      <p class="sub-text">(includes 0 BTC ($0.00) of unconfimed funds)</p>
+    </div>
+
+    <div class="available-balance-title-container">
+      <div class="available-balance-title flex-inline">
+        <span
+          >Available balance: {{ btcAvailableBalance | bitcoinCurrency }}</span
+        >
+        <span
+          >({{
+            btcBalance | exchangeRate : exchangeRateBtcUsd | currency : 'USD'
+          }})</span
+        >
+      </div>
+
+      <div class="expand-action">
+        <span>Account information</span>
+        <mat-icon class="icon">expand_more</mat-icon>
+      </div>
+    </div>
+  </div>
+</div>

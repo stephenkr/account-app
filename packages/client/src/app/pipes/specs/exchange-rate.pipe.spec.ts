@@ -11,4 +11,10 @@ describe('ExchangeRatePipe', () => {
 
     expect(actual).toBe(500)
   })
+
+  it('returns `0` if the exchange rate is `null`', () => {
+    const actual = new ExchangeRatePipe().transform(1, null)
+
+    expect(actual).toBe(0)
+  })
 });

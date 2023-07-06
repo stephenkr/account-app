@@ -19,6 +19,7 @@ import { ToastContainerComponent } from './components/ui/toast-container/toast-c
 import { socketModule } from './lib/socket';
 import { RowHighlightDirective } from './directives/row-highlight.directive';
 import { AccountDetailComponent } from './components/page/account-detail/account-detail.component';
+import { PageDetailTitleComponent } from './components/ui/page-detail-title/page-detail-title.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AccountDetailComponent } from './components/page/account-detail/account
     ToastContainerComponent,
     RowHighlightDirective,
     AccountDetailComponent,
+    PageDetailTitleComponent,
   ],
   imports: [
     HttpClientModule,
