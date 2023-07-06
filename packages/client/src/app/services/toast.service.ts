@@ -5,7 +5,7 @@ interface Toast {
   message: string;
 }
 
-const TOAST_TIMEOUT = 5000 // 5 seconds
+const TOAST_TIMEOUT = 5_000 // 5 seconds
 
 @Injectable({
   providedIn: 'root'

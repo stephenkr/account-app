@@ -10,7 +10,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "app/*": ["./src/app/*"]
+      "app/*": ["./src/app/*"],
+      "src/*": ["./src/*"]
     }
   },
   "files": [],

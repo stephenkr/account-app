@@ -1,4 +1,4 @@
-import { JoinStringsPipe } from './join-strings.pipe';
+import { JoinStringsPipe } from '../join-strings.pipe';
 
 describe('JoinStringsPipe', () => {
   it('create an instance', () => {

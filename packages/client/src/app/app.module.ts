@@ -10,7 +10,7 @@ import { AccountTableComponent } from './components/page/account-table/account-t
 import { PageContainerComponent } from './components/ui/page-container/page-container.component';
 import { PageTitleComponent } from './components/ui/page-title/page-title.component';
 import { environment } from './lib/environment';
-import { materialModules } from './lib/material.library';
+import { materialModules } from './lib/material-ui';
 import { BitcoinCurrencyPipe } from './pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from './pipes/exchange-rate.pipe';
 import { effectsModule, storeModule } from './store';
