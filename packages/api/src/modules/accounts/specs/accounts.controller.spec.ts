@@ -41,8 +41,9 @@ describe('AccountsController', () => {
       const accountService = module.get(AccountsService)
       const expectedAccounts = getAccountCollection(5)
 
-      // TODO: try to remove the casting
-      jest.spyOn(accountService, 'getAllAccounts').mockImplementation(() => Promise.resolve(expectedAccounts as AccountDocument[]))
+      jest.spyOn(accountService, 'getAllAccounts').mockImplementation(
+        () => Promise.resolve(expectedAccounts as AccountDocument[])
+      )
 
       const actual = await controller.findAll()
 

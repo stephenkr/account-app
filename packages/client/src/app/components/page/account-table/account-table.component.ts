@@ -15,7 +15,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./account-table.component.scss'],
 })
 export class AccountTableComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['account_name', 'category', 'tags', 'balance', 'available_balance'];
+  displayedColumns: string[] = ['name', 'category', 'tags', 'balance', 'available_balance'];
   dataSource = new MatTableDataSource<AccountWithChange>([]);
   subscriptions$: Subscription[] = [];
   exchangeRateBtcUsd = 0;
@@ -25,13 +25,12 @@ export class AccountTableComponent implements OnInit, OnDestroy {
   constructor(private store: Store, private socketService: SocketService, private router: Router) { }
 
   ngOnInit(): void {
-    this.dataSource.sort = this.sort;
-
     // Subscribe to accounts for the table
     this.subscriptions$.push(
       this.store.select(selectAccounts).subscribe({
         next: (accounts) => {
           this.dataSource = new MatTableDataSource(accounts)
+          this.dataSource.sort = this.sort;
         }
       })
     )
@@ -68,10 +67,5 @@ export class AccountTableComponent implements OnInit, OnDestroy {
 
   openAccountDetail(rowId: string) {
     this.router.navigate([rowId])
-  }
-
-  // TODO: Add sort ability
-  announceSortChange(sortState: Sort) {
-    // coming soon
   }
 }

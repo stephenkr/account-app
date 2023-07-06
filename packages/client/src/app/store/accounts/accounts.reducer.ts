@@ -1,6 +1,6 @@
 import { createReducer, on } from "@ngrx/store";
 import { fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
-import { AccountWithChange, ChangeDirection } from "./types";
+import { AccountWithChange } from "./types";
 import { getAccountsWithChange, getSingleAccountWithChange } from "./utils/getAccountsWithChange";
 
 export const initialState = {

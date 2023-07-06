@@ -1,18 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store } from '@ngrx/store';
-import { of } from 'rxjs';
+import { MockStore } from '@ngrx/store/testing';
 import { AppComponent } from './app.component';
 import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
 import { materialModules } from './lib/material-ui';
 import { socketModule } from './lib/socket';
 import { ExchangeRatePipe } from './pipes/exchange-rate.pipe';
-import { getMockStore } from './tests/store.mock';
-import { fetchExchangeRate } from './store/accounts/accounts.actions';
 import { selectExchangeRate, selectExchangeRateFetching } from './store/accounts/accounts.selectors';
-import { isFunction } from 'util';
-import { MockStore } from '@ngrx/store/testing';
+import { getMockStore } from './tests/store.mock';
 
 describe('AppComponent', () => {
   let component: AppComponent;

@@ -22,3 +22,7 @@ $my-theme: mat.define-light-theme(
   flex-direction: row-reverse;
   justify-content: space-between;
 }
+
+.date-range-field .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+}

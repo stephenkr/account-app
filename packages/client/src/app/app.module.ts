@@ -21,6 +21,7 @@ import { RowHighlightDirective } from './directives/row-highlight.directive';
 import { AccountDetailComponent } from './components/page/account-detail/account-detail.component';
 import { PageDetailTitleComponent } from './components/ui/page-detail-title/page-detail-title.component';
 import { AccountDetailInnerComponent } from './components/page/account-detail-inner/account-detail-inner.component';
+import { TransactionTypePipe } from './pipes/transaction-type.pipe';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AccountDetailInnerComponent } from './components/page/account-detail-in
     AccountDetailComponent,
     PageDetailTitleComponent,
     AccountDetailInnerComponent,
+    TransactionTypePipe,
   ],
   imports: [
     HttpClientModule,
