@@ -15,4 +15,10 @@ export class AccountService {
 
     return this.httpClient.get<Account[]>(path)
   }
+
+  fetchAccountById(id: string) {
+    const path = `${environment.apiHost}/accounts/${id}`
+
+    return this.httpClient.get<Account>(path)
+  }
 }

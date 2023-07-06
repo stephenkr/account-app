@@ -15,6 +15,10 @@ export class AccountsService {
     return this.accountModel.find().exec()
   }
 
+  async getAccountById(id: string): Promise<AccountDocument> {
+    return this.accountModel.findById(id).exec()
+  }
+
   async updateRandomAccount(): Promise<AccountDocument> {
     const maxRecords = await this.accountModel.count()
     const randomIndex = getRandomNumber(0, maxRecords - 1)

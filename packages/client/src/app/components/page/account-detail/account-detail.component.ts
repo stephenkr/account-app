@@ -1,48 +1,47 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { selectExchangeRate } from 'app/store/accounts/accounts.selectors';
-import { Subscription } from 'rxjs';
-
-const transactions = [{
-  id: 'one',
-  confirmedDate: new Date(),
-  orderId: 'bla',
-  orderCode: 'another',
-  type: 'received',
-  debit: 0,
-  credit: 0.00004,
-  balance: 1
-}]
+import { fetchSelectedAccount } from 'app/store/accounts/accounts.actions';
+import { selectExchangeRate, selectSelectedAccount, selectSelectedAccountFetching } from 'app/store/accounts/accounts.selectors';
+import { of, tap } from 'rxjs';
 
 @Component({
   selector: 'account-app-account-detail',
   templateUrl: './account-detail.component.html',
   styleUrls: ['./account-detail.component.scss'],
 })
-export class AccountDetailComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = ['confirmed_date', 'order_id', 'order_code', 'type', 'debit', 'credit', 'balance'];
-  dataSource = new MatTableDataSource<any>([]);
-  storeSubscriptions$: Subscription[] = [];
-  exchangeRateBtcUsd = 0;
-
-  constructor(private store: Store) { }
+export class AccountDetailComponent implements OnInit {
+  constructor(private store: Store, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.storeSubscriptions$.push(
-      this.store.select(selectExchangeRate).subscribe({
-        next: (exchangeRateBtcUsd) => {
-          this.exchangeRateBtcUsd = exchangeRateBtcUsd
+    const accountId = this.activatedRoute.snapshot.paramMap.get('id')
+
+    if (typeof accountId === 'string') {
+      this.store.dispatch(fetchSelectedAccount({
+        id: accountId
+      }))
+      return;
+    }
+
+    this.router.navigate([''])
+  }
+
+  get exchangeRateBtcUsd$() {
+    return this.store.select(selectExchangeRate)
+  }
+
+  get isFetchingSelectedAccount$() {
+    return this.store.select(selectSelectedAccountFetching)
+  }
+
+  get selectedAccount$() {
+    return this.store.select(selectSelectedAccount).pipe(
+      tap((selectedAccount) => {
+        if (!selectedAccount) {
+          this.router.navigate([''])
         }
       })
     )
-
-    this.dataSource = new MatTableDataSource(transactions)
   }
 
-  ngOnDestroy(): void {
-    this.storeSubscriptions$.forEach((subscription) => {
-      subscription.unsubscribe()
-    })
-  }
 }

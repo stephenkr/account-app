@@ -1,12 +1,16 @@
 import { createReducer, on } from "@ngrx/store";
-import { fetchAccounts, fetchExchangeRate, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "./accounts.actions";
-import { AccountWithChange } from "./types";
+import { fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
+import { AccountWithChange, ChangeDirection } from "./types";
 import { getAccountsWithChange } from "./utils/getAccountsWithChange";
 
 export const initialState = {
   accounts: [] as AccountWithChange[],
   isFetchingAccounts: false,
   hasFetchingAccountsFailed: false,
+
+  selectedAccount: null as AccountWithChange | null,
+  isFetchingSelectedAccount: false,
+  hasFetchingSelectedAccountFailed: false,
 
   exchangeRateBtcUsd: 0,
   isFetchingExchangeRate: false,
@@ -36,6 +40,29 @@ export const accountsReducer = createReducer(
     ...state,
     isFetchingAccounts: false,
     hasFetchingAccountsFailed: true
+  })),
+
+  // selected account specific
+
+  on(setSelectedAccount, (state, { account }): State => ({
+    ...state,
+    selectedAccount: {
+      ...account,
+      changeDirection: ChangeDirection.NoChange
+    },
+    isFetchingSelectedAccount: false
+  })),
+
+  on(fetchSelectedAccount, (state): State => ({
+    ...state,
+    isFetchingSelectedAccount: true,
+    hasFetchingSelectedAccountFailed: false,
+  })),
+
+  on(setSelectedAccountLoadFailed, (state): State => ({
+    ...state,
+    isFetchingSelectedAccount: false,
+    hasFetchingSelectedAccountFailed: true
   })),
 
   // exchange rate specific

@@ -1,59 +1,6 @@
-@import 'src/styles/variables.scss';
-
-.outer-container {
-  background-color: $color-white;
-  border: solid $color-border-base;
-  border-width: 1px 0;
-  margin: 25px 0;
-}
-
-.table-header {
-  .title {
-    margin: 0;
-    color: $color-text-base;
-    font-size: 1.2rem;
-    font-weight: 500;
-  }
-
-  .show-unconfirmed-action {
-    font-size: 0.9rem;
-    color: $color-text-base;
-    font-weight: 500;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-
-    .icon {
-      margin-left: 5px;
-    }
-  }
-}
-
-.filter-container {
-  margin-top: 25px;
-
-  .clear-button {
-    margin-left: 15px;
-  }
-}
-
-.transaction-table {
-  margin-top: 25px;
-
-  th {
-    color: $color-text-accent;
-    font-weight: 500;
-  }
-
-  td {
-    color: $color-text-base;
-    font-weight: 500;
-    padding: 15px;
-  }
-}
-
-.table-paginator-container {
-  margin-top: 15px;
+.loading-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
 }

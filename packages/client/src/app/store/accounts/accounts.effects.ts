@@ -1,7 +1,7 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { ExchangeRateService } from "app/services/exchange-rate.service";
 import { catchError, map, of, switchMap } from "rxjs";
-import { fetchAccounts, fetchExchangeRate, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "./accounts.actions";
+import { fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
 import { Injectable } from "@angular/core";
 import { AccountService } from "app/services/accounts.service";
 import { ToastService } from "app/services/toast.service";
@@ -48,6 +48,28 @@ export class AccountsEffects {
 
             return of(
               setAccountLoadFailed()
+            )
+          })
+        )
+      )
+    )
+  })
+
+  fetchSelectedAccount$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(
+        fetchSelectedAccount
+      ),
+      switchMap(({ id }) =>
+        this.accountService.fetchAccountById(id).pipe(
+          map(account => setSelectedAccount({
+            account
+          })),
+          catchError(() => {
+            this.toastService.showToast('The selected account failed to load')
+
+            return of(
+              setSelectedAccountLoadFailed()
             )
           })
         )
