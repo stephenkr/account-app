@@ -1,6 +1,6 @@
-import { getAccountCollection } from "app/tests/account.testfactory"
-import { initialState } from "../accounts.reducer"
-import { selectAccounts, selectAccountsFetching, selectExchangeRate, selectExchangeRateFetching } from "../accounts.selectors"
+import { getAccountWithChangeCollection } from "app/tests/account.testfactory";
+import { initialState } from "../accounts.reducer";
+import { selectAccounts, selectAccountsFetching, selectExchangeRate, selectExchangeRateFetching } from "../accounts.selectors";
 
 const accountState = {
   ...initialState
@@ -10,7 +10,7 @@ describe('Account selectors', () => {
 
   describe('selectAccounts', () => {
     it('returns the correct state', () => {
-      const accounts = getAccountCollection(5)
+      const accounts = getAccountWithChangeCollection(5)
 
       const actual = selectAccounts.projector({
         ...accountState,

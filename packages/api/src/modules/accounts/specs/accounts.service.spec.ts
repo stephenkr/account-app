@@ -3,7 +3,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { Model } from 'mongoose';
 import { TestDatabase, getTestDatabase } from 'src/test/testDatabase';
 import { getAccountCollection } from 'src/test/account.testfactory'
-import { Account, AccountSchema } from '../accounts.schema';
+import { Account, AccountDocument, AccountSchema } from '../accounts.schema';
 import { AccountsService } from '../accounts.service';
 
 describe('AccountsService', () => {
@@ -45,6 +45,20 @@ describe('AccountsService', () => {
       const accountsCollection = await service.getAllAccounts()
 
       expect(accountsCollection.length).toBe(5)
+    })
+  })
+
+  describe('updateRandomAccount', () => {
+    it('should update a random account document', async () => {
+      await testDatabase.seed('accounts', getAccountCollection(5))
+
+      const accounts = await service.getAllAccounts()
+      const changedAccount = await service.updateRandomAccount()
+
+      const originalAccount = accounts.find((account: AccountDocument) => changedAccount.equals(account))
+
+      expect(changedAccount._id.toString()).toBe(originalAccount._id.toString())
+      expect(originalAccount.balance).not.toBe(changedAccount.balance)
     })
   })
 });

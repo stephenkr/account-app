@@ -22,3 +22,9 @@ export class Account {
 }
 
 export const AccountSchema = SchemaFactory.createForClass(Account);
+
+// Return a clean ID to the frontend
+AccountSchema.set('toJSON', {
+  virtuals: true,
+  transform: function (_doc, ret) { delete ret._id }
+})

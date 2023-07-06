@@ -17,6 +17,7 @@ import { effectsModule, storeModule } from './store';
 import { JoinStringsPipe } from './pipes/join-strings.pipe';
 import { ToastContainerComponent } from './components/ui/toast-container/toast-container.component';
 import { socketModule } from './lib/socket';
+import { RowHighlightDirective } from './directives/row-highlight.directive';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { socketModule } from './lib/socket';
     BitcoinCurrencyPipe,
     JoinStringsPipe,
     ToastContainerComponent,
+    RowHighlightDirective,
   ],
   imports: [
     HttpClientModule,

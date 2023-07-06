@@ -1,7 +1,9 @@
 import { OnGatewayInit, SubscribeMessage, WebSocketGateway, WebSocketServer } from '@nestjs/websockets';
-import { Subscription, interval } from 'rxjs';
+import { BehaviorSubject, Subscription, interval, switchMap, tap, timer } from 'rxjs';
 import { Server } from 'socket.io';
+import { AccountsService } from './accounts.service';
 import { ExchangeRateService } from './services/exchange-rate/exchange-rate.service';
+import { getRandomNumber } from './utils/getRandomNumber';
 
 const SECONDS_30 = 30_000
 
@@ -9,7 +11,9 @@ const SECONDS_30 = 30_000
   cors: true
 })
 export class AccountsGateway implements OnGatewayInit {
-  constructor(private exchangeRateService: ExchangeRateService) { }
+  constructor(private exchangeRateService: ExchangeRateService, private accountService: AccountsService) { }
+
+  accountChangeInterval$: BehaviorSubject<number> = new BehaviorSubject<number>(1000);
 
   @WebSocketServer()
   server: Server;
@@ -22,7 +26,26 @@ export class AccountsGateway implements OnGatewayInit {
     })
   }
 
+  @SubscribeMessage('update')
+  emitAccountChange(): Subscription {
+    return this.accountChangeInterval$.pipe(
+      switchMap((duration) => timer(duration)),
+      tap(() => this.updateAccountChangeTimer())
+    ).subscribe(async () => {
+      await this.accountService.updateRandomAccount()
+      this.server.emit('update', "accountChange");
+    })
+  }
+
   afterInit() {
     this.emitExchangeRateChange()
+    this.emitAccountChange()
+  }
+
+  private updateAccountChangeTimer() {
+    // between 20 and 40 seconds
+    const duration = getRandomNumber(20_000, 40_000)
+
+    this.accountChangeInterval$.next(duration)
   }
 }

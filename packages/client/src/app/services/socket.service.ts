@@ -3,7 +3,8 @@ import { Socket } from 'ngx-socket-io';
 import { filter } from 'rxjs';
 
 export enum SocketActions {
-  ExchangeRateChange = 'exchangeRateChange'
+  ExchangeRateChange = 'exchangeRateChange',
+  AccountChange = 'accountChange'
 }
 
 @Injectable({
@@ -18,6 +19,12 @@ export class SocketService {
       filter((message) =>
         message === SocketActions.ExchangeRateChange
       )
+    )
+  }
+
+  onAccountChange() {
+    return this.socket.fromEvent('update').pipe(
+      filter(message => message === SocketActions.AccountChange)
     )
   }
 }

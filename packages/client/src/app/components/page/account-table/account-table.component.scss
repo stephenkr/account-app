@@ -23,4 +23,30 @@
       padding-left: 40px;
     }
   }
+
+  tr {
+    &.flash-increase {
+      animation: backgroundFlashIncrease 1s ease-in-out 0s;
+    }
+    &.flash-decrease {
+      animation: backgroundFlashDecrease 1s ease-in-out 0s;
+    }
+  }
+}
+
+@keyframes backgroundFlashIncrease {
+  from {
+    background-color: $color-primary;
+  }
+  to {
+    background-color: inherit;
+  }
+}
+@keyframes backgroundFlashDecrease {
+  from {
+    background-color: $color-danger;
+  }
+  to {
+    background-color: inherit;
+  }
 }

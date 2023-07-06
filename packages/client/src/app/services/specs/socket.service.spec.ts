@@ -34,4 +34,15 @@ describe('SocketService', () => {
       done()
     })
   })
+
+  it('should only continue if the message is `accountChange`', (done) => {
+    jest.spyOn(socket, 'fromEvent').mockImplementationOnce(() => (
+      of(SocketActions.AccountChange)
+    ))
+
+    service.onAccountChange().subscribe((message) => {
+      expect(message).toBe(SocketActions.AccountChange)
+      done()
+    })
+  })
 })

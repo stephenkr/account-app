@@ -5,12 +5,14 @@ import { PageTitleComponent } from 'app/components/ui/page-title/page-title.comp
 import { materialModules } from 'app/lib/material-ui';
 import { getMockStore } from 'app/tests/store.mock';
 import { AccountTableComponent } from './account-table.component';
-import { getAccountCollection } from 'app/tests/account.testfactory';
+import { getAccountCollection, getAccountWithChangeCollection } from 'app/tests/account.testfactory';
 import { of } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { JoinStringsPipe } from 'app/pipes/join-strings.pipe';
 import { BitcoinCurrencyPipe } from 'app/pipes/bitcoin-currency.pipe';
 import { ExchangeRatePipe } from 'app/pipes/exchange-rate.pipe';
+import { socketModule } from 'app/lib/socket';
+import { RowHighlightDirective } from 'app/directives/row-highlight.directive';
 
 describe('AccountTableComponent', () => {
   let component: AccountTableComponent;
@@ -24,13 +26,15 @@ describe('AccountTableComponent', () => {
         PageContainerComponent,
         ExchangeRatePipe,
         BitcoinCurrencyPipe,
-        JoinStringsPipe
+        JoinStringsPipe,
+        RowHighlightDirective
       ],
       providers: [
-        getMockStore()
+        getMockStore(),
       ],
       imports: [
         NoopAnimationsModule,
+        socketModule,
         ...materialModules
       ]
     })
@@ -41,7 +45,7 @@ describe('AccountTableComponent', () => {
   });
 
   it('should create the table with the rows', () => {
-    component.dataSource = new MatTableDataSource(getAccountCollection(5))
+    component.dataSource = new MatTableDataSource(getAccountWithChangeCollection(5))
 
     fixture.detectChanges()
 

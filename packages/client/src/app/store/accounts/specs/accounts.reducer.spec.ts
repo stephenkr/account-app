@@ -1,6 +1,6 @@
-import { getAccountCollection } from "app/tests/account.testfactory";
-import { accountsReducer, initialState } from "../accounts.reducer";
+import { getAccountWithChangeCollection } from "app/tests/account.testfactory";
 import { fetchAccounts, fetchExchangeRate, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed } from "../accounts.actions";
+import { accountsReducer, initialState } from "../accounts.reducer";
 
 describe('Account reducer', () => {
   it('unknown action', () => {
@@ -17,7 +17,7 @@ describe('Account reducer', () => {
 
     describe('set accounts', () => {
       it('should set the accounts and set related fetching state to `false`', () => {
-        const accounts = getAccountCollection(5)
+        const accounts = getAccountWithChangeCollection(5)
 
         const actual = accountsReducer({
           ...initialState,

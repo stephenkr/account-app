@@ -2,9 +2,10 @@ import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Store } from '@ngrx/store';
+import { SocketService } from 'app/services/socket.service';
 import { fetchAccounts } from 'app/store/accounts/accounts.actions';
 import { selectAccounts, selectAccountsFetching, selectExchangeRate } from 'app/store/accounts/accounts.selectors';
-import { Account } from 'app/store/accounts/types';
+import { AccountWithChange } from 'app/store/accounts/types';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -14,13 +15,13 @@ import { Subscription } from 'rxjs';
 })
 export class AccountTableComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['account_name', 'category', 'tags', 'balance', 'available_balance'];
-  dataSource = new MatTableDataSource<Account>([]);
+  dataSource = new MatTableDataSource<AccountWithChange>([]);
   storeSubscriptions$: Subscription[] = [];
   exchangeRateBtcUsd = 0;
 
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private store: Store) { }
+  constructor(private store: Store, private socketService: SocketService) { }
 
   ngOnInit(): void {
     this.dataSource.sort = this.sort;
@@ -44,6 +45,12 @@ export class AccountTableComponent implements OnInit, OnDestroy {
     )
 
     this.store.dispatch(fetchAccounts())
+
+    this.socketService.onAccountChange().subscribe({
+      next: () => {
+        this.store.dispatch(fetchAccounts())
+      }
+    })
   }
 
   ngOnDestroy(): void {
@@ -56,6 +63,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
     return this.store.select(selectAccountsFetching)
   }
 
+  // TODO: Add sort ability
   announceSortChange(sortState: Sort) {
     // coming soon
   }

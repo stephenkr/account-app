@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AccountsController } from '../accounts.controller';
 import { AccountsService } from '../accounts.service';
 import { getModelToken } from '@nestjs/mongoose';
-import { Account } from '../accounts.schema';
+import { Account, AccountDocument } from '../accounts.schema';
 import { ExchangeRateService } from '../services/exchange-rate/exchange-rate.service';
 import { getAccountCollection } from 'src/test/account.testfactory';
 
@@ -37,7 +37,8 @@ describe('AccountsController', () => {
       const accountService = module.get(AccountsService)
       const expectedAccounts = getAccountCollection(5)
 
-      jest.spyOn(accountService, 'getAllAccounts').mockImplementation(() => Promise.resolve(expectedAccounts))
+      // TODO: try to remove the casting
+      jest.spyOn(accountService, 'getAllAccounts').mockImplementation(() => Promise.resolve(expectedAccounts as AccountDocument[]))
 
       const actual = await controller.findAll()
 

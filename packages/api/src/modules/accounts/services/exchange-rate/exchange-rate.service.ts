@@ -1,15 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { getRandomNumber } from './utils/getRandomNumber';
+import { getRandomNumber } from '../../utils/getRandomNumber';
 
 @Injectable()
 export class ExchangeRateService {
-  private btcUsdValue = getRandomNumber(5_000, 12_000)
+  private btcUsdValue = this.getRandomNumber()
 
   updateExchangeRate() {
-    this.btcUsdValue = getRandomNumber(5_000, 12_000)
+    this.btcUsdValue = this.getRandomNumber()
   }
 
   get exchangeRate() {
     return this.btcUsdValue
+  }
+
+  private getRandomNumber() {
+    return getRandomNumber(5_000, 12_000)
   }
 }
