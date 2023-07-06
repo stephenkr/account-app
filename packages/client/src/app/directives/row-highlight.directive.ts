@@ -1,4 +1,4 @@
-import { Directive, HostBinding, Input, OnChanges } from '@angular/core';
+import { Directive, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChangeDirection } from 'app/store/accounts/types';
 import { timer } from 'rxjs';
 
@@ -13,9 +13,16 @@ export class RowHighlightDirective implements OnChanges {
   @HostBinding('class')
   elementClass = '';
 
-  ngOnChanges() {
-    this.elementClass = `flash-${this.accountAppRowHighlight}`
-    this.resetClass()
+  ngOnChanges(changes: SimpleChanges) {
+    const highlightChange = changes['accountAppRowHighlight']
+
+    if (
+      typeof highlightChange.previousValue === 'undefined' ||
+      !highlightChange.isFirstChange() && highlightChange.previousValue !== highlightChange.currentValue
+    ) {
+      this.elementClass = `flash-${this.accountAppRowHighlight}`
+      this.resetClass()
+    }
   }
 
   private resetClass() {
