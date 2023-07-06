@@ -1,11 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
-import { getRandomNumber } from './utils/getRandomNumber';
+import { ExchangeRateService } from './services/exchange-rate/exchange-rate.service';
 
 @Controller('accounts')
 export class AccountsController {
 
-  constructor(private accountService: AccountsService) { }
+  constructor(private accountService: AccountsService, private exchangeRateService: ExchangeRateService) { }
 
   @Get()
   findAll() {
@@ -16,7 +16,7 @@ export class AccountsController {
   getExchangeBtcUsdRate() {
     return {
       btc: 1,
-      usd: getRandomNumber(5_000, 12_000)
+      usd: this.exchangeRateService.exchangeRate
     }
   }
 }

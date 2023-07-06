@@ -79,6 +79,7 @@
     "jest-marbles": "^3.0.3",
     "jest-preset-angular": "~13.1.0",
     "mongo-seeding": "^3.7.2",
+    "mongodb-memory-server": "^8.13.0",
     "nx": "16.4.3",
     "nx-cloud": "latest",
     "prettier": "^2.6.2",

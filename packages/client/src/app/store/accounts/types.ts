@@ -5,3 +5,13 @@ export interface Account {
   balance: number;
   availableBalance: number;
 }
+
+export enum ChangeDirection {
+  Increase = 'increase',
+  Decrease = 'decrease',
+  NoChange = 'no-change'
+}
+
+export interface AccountWithChange extends Account {
+  changeDirection: ChangeDirection
+}
