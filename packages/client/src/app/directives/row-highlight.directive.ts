@@ -8,7 +8,7 @@ const ONE_SECOND = 1_000
   selector: '[accountAppRowHighlight]',
 })
 export class RowHighlightDirective implements OnChanges {
-  @Input() public accountAppRowHighlight!: ChangeDirection;
+  @Input() accountAppRowHighlight!: ChangeDirection;
 
   @HostBinding('class')
   elementClass = '';

@@ -16,7 +16,7 @@ export class AccountsGateway implements OnGatewayInit {
   constructor(private exchangeRateService: ExchangeRateService, private accountService: AccountsService) { }
 
   @WebSocketServer()
-  server: Server;
+  server: Server
 
   @SubscribeMessage('update')
   emitExchangeRateChange() {
