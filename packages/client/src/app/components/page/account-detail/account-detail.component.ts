@@ -1,19 +1,27 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { SocketService } from 'app/services/socket.service';
 import { fetchSelectedAccount } from 'app/store/accounts/accounts.actions';
 import { selectExchangeRate, selectSelectedAccount, selectSelectedAccountFetching } from 'app/store/accounts/accounts.selectors';
 import { fetchTransactions } from 'app/store/transactions/transactions.actions';
 import { selectTransactions } from 'app/store/transactions/transactions.selectors';
-import { of, tap } from 'rxjs';
+import { Subscription, tap } from 'rxjs';
 
 @Component({
   selector: 'account-app-account-detail',
   templateUrl: './account-detail.component.html',
   styleUrls: ['./account-detail.component.scss'],
 })
-export class AccountDetailComponent implements OnInit {
-  constructor(private store: Store, private activatedRoute: ActivatedRoute, private router: Router) { }
+export class AccountDetailComponent implements OnInit, OnDestroy {
+  socketSubscription: Subscription | null = null;
+
+  constructor(
+    private store: Store,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private socketService: SocketService
+  ) { }
 
   ngOnInit(): void {
     const accountId = this.activatedRoute.snapshot.paramMap.get('id')
@@ -25,10 +33,28 @@ export class AccountDetailComponent implements OnInit {
       this.store.dispatch(fetchTransactions({
         accountId
       }))
+
+      this.socketSubscription = this.socketService.onAccountChange().subscribe({
+        next: () => {
+          this.store.dispatch(fetchSelectedAccount({
+            id: accountId
+          }))
+          this.store.dispatch(fetchTransactions({
+            accountId
+          }))
+        }
+      })
+
       return;
     }
 
     this.router.navigate([''])
+  }
+
+  ngOnDestroy(): void {
+    if (this.socketSubscription) {
+      this.socketSubscription.unsubscribe()
+    }
   }
 
   get exchangeRateBtcUsd$() {

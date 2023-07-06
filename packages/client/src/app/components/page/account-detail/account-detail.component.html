@@ -5,11 +5,8 @@
     { path: '/', title: 'Accounts' },
     { title: 'Details' }
   ]"
+  [isFetching]="isFetchingSelectedAccount$ | async"
 />
-
-<div *ngIf="isFetchingSelectedAccount$ | async" class="loading-container">
-  <mat-spinner color="accent" />
-</div>
 
 <div *ngIf="selectedAccount$ | async; let selectedAccount">
   <account-app-account-detail-inner

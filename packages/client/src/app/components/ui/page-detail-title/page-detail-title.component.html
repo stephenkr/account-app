@@ -9,7 +9,10 @@
     </div>
 
     <div class="balance-title-container">
-      <div class="flex-inline">
+      <div
+        class="flex-inline balance-title"
+        [accountAppRowHighlight]="changeDirection"
+      >
         <span class="btc-amount">
           {{ btcBalance | bitcoinCurrency }}
         </span>
@@ -23,7 +26,10 @@
     </div>
 
     <div class="available-balance-title-container">
-      <div class="available-balance-title flex-inline">
+      <div
+        class="available-balance-title flex-inline"
+        [accountAppRowHighlight]="changeDirection"
+      >
         <span
           >Available balance: {{ btcAvailableBalance | bitcoinCurrency }}</span
         >

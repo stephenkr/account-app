@@ -1,5 +1,5 @@
 import { generateAccount } from "app/tests/account.testfactory"
-import { getAccountsWithChange, getChangeDirection } from "./getAccountsWithChange"
+import { getAccountsWithChange, getChangeDirection, getSingleAccountWithChange } from "./getAccountsWithChange"
 import { ChangeDirection } from "../types"
 
 describe('getAccountsWithChange', () => {
@@ -17,16 +17,24 @@ describe('getAccountsWithChange', () => {
       expect(actual).toBe(ChangeDirection.Decrease)
     })
 
-    it('should return `no-change` if the new value is `undefined`', () => {
-      const actual = getChangeDirection(undefined, 1)
-
-      expect(actual).toBe(ChangeDirection.NoChange)
-    })
-
     it('should return `no-change` if the new value is the same', () => {
       const actual = getChangeDirection(1, 1)
 
       expect(actual).toBe(ChangeDirection.NoChange)
+    })
+
+    describe('falsy values', () => {
+      it('should return `no-change` if the new value is `undefined`', () => {
+        const actual = getChangeDirection(undefined, 1)
+
+        expect(actual).toBe(ChangeDirection.NoChange)
+      })
+
+      it('should return `no-change` if the new value is `null`', () => {
+        const actual = getChangeDirection(null, 1)
+
+        expect(actual).toBe(ChangeDirection.NoChange)
+      })
     })
   })
 
@@ -62,6 +70,29 @@ describe('getAccountsWithChange', () => {
           changeDirection: ChangeDirection.Increase
         }
       ])
+    })
+  })
+
+  describe('getSingleAccountWithChange', () => {
+    it('should return the new account with change direction if the balances changed', () => {
+      const originalAccount = {
+        ...generateAccount(),
+        balance: 1,
+        availableBalance: 2
+      }
+
+      const newAccount = {
+        ...originalAccount,
+        balance: 10,
+        availableBalance: 15
+      }
+
+      const actual = getSingleAccountWithChange(originalAccount, newAccount)
+
+      expect(actual).toEqual({
+        ...newAccount,
+        changeDirection: ChangeDirection.Increase
+      })
     })
   })
 })

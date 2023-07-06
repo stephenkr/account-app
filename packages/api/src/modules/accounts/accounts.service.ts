@@ -24,7 +24,7 @@ export class AccountsService {
     const maxRecords = await this.accountModel.count()
     const randomIndex = getRandomNumber(0, maxRecords - 1)
 
-    return this.accountModel.findOne().skip(randomIndex)
+    return this.accountModel.findOne().skip(randomIndex).exec()
   }
 
   async updateRandomAccount(): Promise<string> {

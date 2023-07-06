@@ -34,9 +34,13 @@
   margin: 0;
   padding: 25px 0;
 
+  .balance-title {
+    display: inline-flex;
+    color: $color-primary;
+  }
+
   .btc-amount,
   .usd-amount {
-    color: $color-primary;
     font-size: 3rem;
     margin: 0;
   }
@@ -60,6 +64,7 @@
     color: $color-text-base;
     margin: 0;
     font-weight: 400;
+    display: inline-flex;
 
     span + span {
       margin-left: 5px;

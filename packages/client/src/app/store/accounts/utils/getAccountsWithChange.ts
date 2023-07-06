@@ -1,7 +1,7 @@
 import { Account, AccountWithChange, ChangeDirection } from "../types"
 
-export const getChangeDirection = (originalValue: number | undefined, newValue: number): ChangeDirection => {
-  if (typeof originalValue === 'undefined' || originalValue === newValue) {
+export const getChangeDirection = (originalValue: number | undefined | null, newValue: number): ChangeDirection => {
+  if (typeof originalValue !== 'number' || originalValue === newValue) {
     return ChangeDirection.NoChange
   }
 
@@ -12,18 +12,22 @@ export const getChangeDirection = (originalValue: number | undefined, newValue: 
   return ChangeDirection.Increase
 }
 
+export const getSingleAccountWithChange = (originalDocument: Account | undefined | null, newDocument: Account): AccountWithChange => {
+  return {
+    ...newDocument,
+    changeDirection: getChangeDirection(
+      originalDocument?.availableBalance,
+      newDocument.availableBalance
+    )
+  }
+}
+
 export const getAccountsWithChange = (originalCollection: Account[], newCollection: Account[]): AccountWithChange[] => {
   return newCollection.map((document) => {
     const originalDocument = originalCollection.find(
       (originalDocument) => originalDocument.id === document.id
     )
 
-    return {
-      ...document,
-      changeDirection: getChangeDirection(
-        originalDocument?.availableBalance,
-        document.availableBalance
-      )
-    }
+    return getSingleAccountWithChange(originalDocument, document)
   })
 }

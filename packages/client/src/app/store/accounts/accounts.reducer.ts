@@ -1,7 +1,7 @@
 import { createReducer, on } from "@ngrx/store";
 import { fetchAccounts, fetchExchangeRate, fetchSelectedAccount, setAccountLoadFailed, setAccounts, setExchangeRateBtcUsd, setExchangeRateLoadFailed, setSelectedAccount, setSelectedAccountLoadFailed } from "./accounts.actions";
 import { AccountWithChange, ChangeDirection } from "./types";
-import { getAccountsWithChange } from "./utils/getAccountsWithChange";
+import { getAccountsWithChange, getSingleAccountWithChange } from "./utils/getAccountsWithChange";
 
 export const initialState = {
   accounts: [] as AccountWithChange[],
@@ -46,10 +46,10 @@ export const accountsReducer = createReducer(
 
   on(setSelectedAccount, (state, { account }): State => ({
     ...state,
-    selectedAccount: {
-      ...account,
-      changeDirection: ChangeDirection.NoChange
-    },
+    selectedAccount: getSingleAccountWithChange(
+      state.selectedAccount,
+      account
+    ),
     isFetchingSelectedAccount: false
   })),
 

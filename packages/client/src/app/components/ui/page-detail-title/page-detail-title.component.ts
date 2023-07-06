@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ChangeDirection } from 'app/store/accounts/types';
 
 @Component({
   selector: 'account-app-page-detail-title',
@@ -10,4 +11,5 @@ export class PageDetailTitleComponent {
   @Input() btcBalance = 0
   @Input() btcAvailableBalance = 0
   @Input() exchangeRateBtcUsd: number | null = 0
+  @Input() changeDirection: ChangeDirection = ChangeDirection.NoChange
 }
