@@ -80,6 +80,8 @@
       *matRowDef="let row; columns: displayedColumns"
       [accountAppRowHighlight]="row.changeDirection"
       (click)="openAccountDetail(row.id)"
+      (keyup.enter)="openAccountDetail(row.id)"
+      tabindex="0"
     ></tr>
   </table>
 </account-app-page-container>

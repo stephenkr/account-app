@@ -22,8 +22,11 @@
           class="item"
           [ngClass]="{ 'is-link': breadcrumb.path }"
           (click)="openBreadcrumb(breadcrumb.path)"
-          >{{ breadcrumb.title }}</a
+          (keyup.enter)="openBreadcrumb(breadcrumb.path)"
+          [tabindex]="breadcrumb.path ? 0 : -1"
         >
+          {{ breadcrumb.title }}
+        </a>
       </div>
     </div>
   </div>
