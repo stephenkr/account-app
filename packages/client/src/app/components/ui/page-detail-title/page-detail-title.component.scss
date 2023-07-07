@@ -47,6 +47,10 @@
 
   .btc-amount {
     font-weight: 500;
+
+    + .usd-amount {
+      margin-left: 10px;
+    }
   }
 
   .usd-amount {

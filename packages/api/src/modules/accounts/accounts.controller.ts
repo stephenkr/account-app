@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { ExchangeRateService } from './services/exchange-rate/exchange-rate.service';
 import { TransactionsService } from '../transactions/transactions.service';
@@ -26,12 +26,21 @@ export class AccountsController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountService.getAccountById(id)
+  async findOne(@Param('id') id: string) {
+    try {
+      const response = await this.accountService.getAccountById(id)
+
+      return response;
+    } catch {
+      throw new NotFoundException()
+    }
   }
 
   @Get(':id/transactions')
-  findAllTransactions(@Param('id') id: string) {
+  async findAllTransactions(@Param('id') id: string) {
+    // ensure account exists
+    await this.findOne(id)
+
     return this.transactionService.getAllAccountTransactions(id)
   }
 }

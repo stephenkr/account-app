@@ -17,7 +17,7 @@ export class AccountsService {
   }
 
   async getAccountById(id: string): Promise<AccountDocument> {
-    return this.accountModel.findById(id).exec()
+    return this.accountModel.findById(id).orFail().exec()
   }
 
   async getRandomAccount(): Promise<AccountDocument> {

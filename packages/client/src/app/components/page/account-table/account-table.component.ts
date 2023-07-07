@@ -46,6 +46,7 @@ export class AccountTableComponent implements OnInit, OnDestroy {
 
     this.store.dispatch(fetchAccounts())
 
+    // Subscribe to the websocket for when an account changes
     this.subscriptions$.push(
       this.socketService.onAccountChange().subscribe({
         next: () => {

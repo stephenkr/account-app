@@ -15,6 +15,7 @@ import { Subscription } from 'rxjs';
 })
 export class AccountDetailComponent implements OnInit, OnDestroy {
   socketSubscription: Subscription | null = null;
+  selectedAccountFailedSubscription: Subscription | null = null;
 
   constructor(
     private store: Store,
@@ -28,11 +29,12 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
       this.activatedRoute.snapshot.paramMap.get('id')
     )
 
-    this.store.select(selectSelectedAccountFailed).subscribe((hasFailed) => {
-      if (hasFailed) {
-        this.router.navigate([''])
-      }
-    })
+    this.selectedAccountFailedSubscription = this.store.select(selectSelectedAccountFailed)
+      .subscribe((hasFailed) => {
+        if (hasFailed) {
+          this.router.navigate([''])
+        }
+      })
   }
 
   requestDetailData(accountId: string | null) {
@@ -65,6 +67,9 @@ export class AccountDetailComponent implements OnInit, OnDestroy {
 
     if (this.socketSubscription) {
       this.socketSubscription.unsubscribe()
+    }
+    if (this.selectedAccountFailedSubscription) {
+      this.selectedAccountFailedSubscription.unsubscribe()
     }
   }
 
