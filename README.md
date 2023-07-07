@@ -1,6 +1,6 @@
 # The account app
 
-This is a NxJS monorepo that contains an Angular frontend(known as the client) and a NestJS backend (known as the API).
+This is a monorepo powered by NxJS that contains an Angular frontend(known as the client) and a NestJS backend (known as the API).
 
 ## Installation
 
@@ -24,7 +24,7 @@ To seed the database you can run:
 yarn seed:api
 ```
 
-Once done, to run the applications, please open two terminal commands, one for each application.
+Once done, to run the applications, please open two terminal windows, one for each application.
 
 **To run the client**
 
@@ -68,6 +68,25 @@ You can run the lint task for both projects using:
 yarn lint:all
 ```
 
-### NxJS
+## NxJS
 
 For other useful commands with the NxJS system, you can also use the [VSCode extension found here](https://marketplace.visualstudio.com/items?itemName=nrwl.angular-console)
+
+## The user experience
+
+The frontend application consists of two pages:
+
+- The account table
+- The detailed view for the account.
+
+The account table lists a number of accounts returned from the backend, the Bitcoin value is converted into USD dollars using the exchange rate provided by the backend.
+
+The exchange rate changes every 30 seconds, and the USD values are reflected by this change.
+
+**The account detail page**
+
+You can access the detail page of the account by clicking on one of the account table rows.
+
+This page consists of a table of transactions associated with the selected account.
+
+Each 20 to 40 seconds, a new transaction is added to a random account. When an account is updated, it will flash green if the balance has increased, red if decreased, or nothing if the value remains the same.
